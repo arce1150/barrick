@@ -1,0 +1,66 @@
+BODY
+{
+    FONT-SIZE: 9.5pt;
+    COLOR: #006699;
+    FONT-FAMILY: Tahoma;
+    BACKGROUND-COLOR: #ffffff
+}
+OPTION
+{
+    FONT-SIZE: 9.5pt; 
+    FONT-FAMILY: Tahoma
+}
+TD
+{
+    FONT-SIZE: 9.5pt;
+    FONT-FAMILY: Tahoma
+}
+SELECT
+{
+    FONT-SIZE: 8pt;
+    COLOR: #006699;
+    FONT-FAMILY: Tahoma; 
+}
+INPUT
+{
+    FONT-SIZE: 9.5pt;
+    COLOR: blue;
+    FONT-FAMILY: Tahoma
+}
+BUTTON
+{
+    FONT-SIZE: 9.5pt;
+    COLOR: blue;
+    FONT-FAMILY: Tahoma
+}
+TEXTAREA
+{
+    FONT-SIZE: 9.5pt;
+    COLOR: blue;
+    FONT-FAMILY: Tahoma
+}
+A:active
+{
+    FONT-SIZE: 9.5pt;
+    COLOR: black;
+    FONT-FAMILY: Tahoma;
+    BACKGROUND-COLOR: aqua
+}
+A
+{
+    COLOR: mediumblue;
+    FONT-FAMILY: Tahoma;
+    TEXT-DECORATION: none;
+    FONT-COLOR: mediumblue;
+   
+}
+A:hover
+{
+    COLOR: red;
+    FONT-FAMILY: Tahoma;
+    TEXT-DECORATION: underline
+}
+A.Enlace
+{
+    COLOR: white
+}

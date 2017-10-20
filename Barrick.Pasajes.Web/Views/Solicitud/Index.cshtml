@@ -1,0 +1,976 @@
+﻿@model Barrick.Pasajes.BusinessEntity.DetallePasajesBe
+@{
+    ViewBag.Title = "Solicitud de Pasajes Terrestres";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var sessionSolicitante = HttpContext.Current.Session["n_nombre"];
+
+}
+<link href='@Url.Content("~/Content/css/petitorio.css")' type="text/css" rel="stylesheet" />
+<style type="text/css">
+    body {
+        border-right: white 3px solid;
+        border-bottom: white 5px solid;
+    }
+
+    a:link {
+        color: navy;
+        text-decoration: none;
+    }
+
+    a:visited {
+        COLOR: navy;
+        text-decoration: none;
+    }
+
+    a:active {
+        color: navy;
+        text-decoration: none;
+    }
+
+    a:hover {
+        COLOR: red;
+        text-decoration: underline;
+    }
+
+    a.nav:link {
+        color: white;
+        text-decoration: none;
+    }
+
+    A.nav:visited {
+        color: white;
+        text-decoration: none;
+    }
+
+    A.nav:active {
+        color: white;
+        text-decoration: none;
+    }
+
+    a.blank:link {
+        color: white;
+        text-decoration: none;
+    }
+
+    a.blank:visited {
+        color: white;
+        text-decoration: none;
+    }
+
+    a.blank:active {
+        color: white;
+        text-decoration: none;
+    }
+
+    a.tool:link {
+        color: white;
+        text-decoration: none;
+    }
+
+    a.tool:visited {
+        COLOR: white;
+        text-decoration: none;
+    }
+
+    a.tool:active {
+        color: white;
+        text-decoration: none;
+    }
+
+    a.tool:hover {
+        color: #35bdff;
+        background-color: white;
+    }
+
+    input.error,textarea.error {
+        border: 1px solid #E77776 !important;
+        background: #F8DBDB !important;
+    }
+
+    .loading {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(243, 242, 242, 0.53);
+        height: 1009px;
+        color: #38383e;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .loading p {
+            padding-top: 30%;
+    }
+</style>
+<div id="divLoading" class="loading" align="center" style="display:none">
+    <p>
+        Guardando. Un Momento por favor...<br /> <br />
+        <img src='@Url.Content("~/Content/images/loading.gif")' alt="Guardando" />
+    </p>
+    
+</div>
+<center>
+
+    <form action='@Url.Content("~/Solicitud/insertarPasajes")' autocomplete="off" name="frmPasajes" id="frmPasajes" target="_blank" onReset="return numeroTextos()">
+        <input type="hidden" id="txtTabla1" name="txtTabla1">
+        <input type="hidden" id="txtTabla2" name="txtTabla2">
+        <input type="hidden" id="txtTabla3" name="txtTabla3">
+        <table cellspacing="0" cellpadding="5" width="800px" border="2px" bgcolor="AliceBlue">
+            <tbody>
+                <tr bordercolor="#F4F4F4">
+                    <td background='@Url.Content("~/Content/images/fondo_cabecera.jpg")' width="124px" valign="center" align="center"><img src='@Url.Content("~/Content/images/barrick_blanco.gif")' border="0" width="75" height="43"></td>
+                    <th background='@Url.Content("~/Content/images/fondo_cabecera.jpg")' width="526px" valign="top"><font size="4"><br>MINERA BARRICK MISQUICHILCA S.A<br>Solicitud de Pasajes Terrestres<br><br></font></th>
+                    <td background='@Url.Content("~/Content/images/fondo_cabecera.jpg")' width="124px" valign="center" align="center"><img src='@Url.Content("~/Content/images/barrick_blanco.gif")' width="75" height="43"></td>
+                </tr>
+                <tr>
+                    <td width="650px" valign="center" colspan="3">
+                        <table cellspacing="2" cellpadding="2" width="800px" border="1">
+                            <tbody>
+                                <tr>
+                                    <td width="70%" colspan="2" align="right" bordercolor="AliceBlue"><b>FECHA DE SOLICITUD</b></td>
+                                    <td width="30%" align="right" bgcolor="white"><font id="fechaSistem" color="#4B0082"> </font></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="800px" valign="center" colspan="3">
+                        <table cellspacing="2" cellpadding="2" width="800px" border="0">
+                            <tbody>
+                                <tr bgcolor="#006699">
+
+                                    <th width="25%" align="left"><font color="white">SEDE</font></th>
+                                    <th width="45%" align="left"><font color="white">AREA</font></th>
+                                    <th width="30%" align="left"><font color="white">C. COSTO</font></th>
+                                </tr>
+                                <tr>
+                                    <th width="25%">
+                                        <select size="1" name="AREAS" id="ddlbAREAS" style="WIDTH: 100%; HEIGHT: 100%" onchange="CambiarSede(this.value)"></select>
+                                    </th>
+                                    <th width="35%">
+                                        <select size="1" name="SECCION" id="ddlbSECCION" style="WIDTH: 100%; HEIGHT: 100%" onchange="CambiarArea(this.value)"></select>
+                                    </th>
+
+                                    <th width="40%">
+                                        <select size="1" name="COSTOS" id="ddlbCOSTOS" style="WIDTH: 100%; HEIGHT: 100%" onchange="ccostos()"></select>
+                                </tr>
+                                <tr bgcolor="#006699">
+                                    <th align="left"><font color="white">CUENTA</font></th>
+                                    <th align="left" colspan="5"><font color="white">EMPRESA DE TRANSPORTES</font></th>
+                                </tr>
+                                <tr>
+                                    <th width="25%">
+                                        <select size="1" name="CUENTA" id="ddlbCUENTA" style="WIDTH: 100%; HEIGHT: 100%"></select>
+                                        <input type="hidden" id="CANTPASAJEROS" title="Se llena en forma automática cuando se ingresa un Pasajero" name="CANTPASAJEROS" value="0" readonly="" />
+                                    </th>
+                                    <th colspan="5">
+                                        <select id="ddlbEMPRESA" name="EMPRESA" style="WIDTH: 100%; HEIGHT: 100%" onchange="CambiarRuta(this.value);"></select>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="800px" valign="center" colspan="3">
+                        <table cellspacing="2" cellpadding="2" width="800px" border="0">
+                            <tbody>
+                                <tr><th width="100%" align="left" colspan="2" bgcolor="#006699"><font color="white">RUTA</font></th></tr>
+                                <tr>
+                                    <th width="50%" align="left">
+                                        ORIGEN: <select id="ddlbORIGEN" name="ORIGEN" style="width: 50%; height: 100%" onchange="CambiarDestino(this.value, ddlbEMPRESA.value)"></select>
+                                    </th>
+                                    <th width="50%" align="left">
+                                        DESTINO:<select id="ddlbDESTINO" name="DESTINO" style="width: 50%; height: 100%" onchange="CambiarHorario(ddlbORIGEN.value, this.value, ddlbEMPRESA.value)"></select>
+                                    </th>
+                                </tr>
+                            </tbody>
+                            <tbody name="tabla2" id="tabla2">
+                                <tr>
+                                    <th width="50%" align="left" bordercolor="navy">FECHA DE SALIDA:</th>
+                                    <th width="50%" align="left" bordercolor="navy">
+                                        FECHA DE RETORNO:
+                                        <input type="checkbox" value="true" id="chkCheck" name="Check" onclick="HabiRetorno()">
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td width="50%">
+                                        <select id="ddlbDIASALIDA" name="DIASALIDA"></select>/
+                                        <select id="ddlbMESSALIDA" name="MESSALIDA"></select>/
+                                        <select id="ddlbANIOSALIDA" name="ANIOSALIDA"></select>
+                                    </td>
+                                    <td width="50%">
+                                        <select id="ddlbDIARETORNO" name="DIARETORNO" disabled=""></select>/
+                                        <select id="ddlbMESRETORNO" name="MESRETORNO" disabled=""></select>/
+                                        <select id="ddlbANIORETORNO" name="ANIORETORNO" disabled=""></select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <th width="50%" align="left">HORA DE SALIDA:</th>
+                                    <th width="50%" align="left">HORA DE RETORNO:</th>
+                                </tr>
+                                <tr>
+                                    <td width="50%">
+                                        <select id="ddlbHORASALIDA" name="HORASALIDA"   style="width: 99%;height: 100%"></select>
+                                    </td>
+                                    <td width="50%">
+                                        <select id="ddlbHORARETORNO" name="HORARETORNO" disabled="disabled" style="width : 99%; height: 100%"></select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody name="tabla3" id="tabla3">
+                <tr>
+                    <td width="800px" valign="center" colspan="3">
+                        <table cellspacing="2" cellpadding="2" width="800px" border="0">
+                            <tbody>
+                                <tr><th width="100%" colspan="3" bgcolor="#006699"><font color="white">MOTIVO DEL VIAJE</font></th></tr>
+                                <tr>
+                                    <td width="100%" height="50px" colspan="3">
+                                        <textarea id="txtMOTIVO" name="MOTIVO" style="WIDTH: 100%;" rows="2" cols="53"></textarea>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="800px" valign="center" colspan="3">
+                        <table cellspacing="2" cellpadding="2" width="800px" border="0">
+                            <tbody>
+                                <tr>
+                                    <th width="36%" align="left" bgcolor="#006699"><font color="white">NOMBRE DE PASAJERO</font></th>
+                                    <th width="30%" align="left" bgcolor="#006699"><font color="white">DOCUMENTO DE IDENTIDAD</font></th>
+                                    <td width="20%">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" width="80%" valign="top">
+                                        <table id="mitabla1" cellspacing="2" cellpadding="2" border="0" width="100%">
+                                            <tbody></tbody>
+                                        </table>
+                                    </td>
+                                    <td width="20%" valign="top">
+                                        <table cellspacing="2" cellpadding="2" border="0" width="100%">
+                                            <tbody>
+                                               
+                                                <tr>
+                                                    <td>
+                                                        <input type="button" value="Agregar Pasajero" id="Agregar_1" name="Agregar_1" onclick="Agregar1()" style="width: 120px;">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="button" value="Quitar Pasajero" id="Quitar_1" name="Quitar_1" title="Seleccionar Chek y Hacer Click para Quitar Pasajero" onclick="Quitar1()" style="width: 120px;">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="800px" valign="center" colspan="3">
+                        <table cellspacing="2" cellpadding="2" width="800px" border="0">
+                            <tbody>
+                                <tr bgcolor="#006699">
+                                    <th width="33%"><font color="white">SOLICITADO POR</font></th>
+                                    <th width="33%"><font color="white">APROBADO POR</font></th>
+                                    <th width="33%"><font color="white">APROBACION AUTOMATICA</font></th>
+                                </tr>
+                                <tr>
+                                    <th width="33%"><input type="text" id="txtSolicitante" readonly="readonly" name="txtSolicitante" value="@sessionSolicitante" style="width: 100%; height: 100%"></th>
+                                    <th width="33%">
+                                        <input type="hidden" id="txtAprobador" name="txtAprobador">
+                                        <select size="1" name="APROBADO" id="ddlbAPROBADO" style="width: 100%; height: 100%"></select>
+                                    </th>
+                                    <th width="33%">
+                                        <select size="1" name="CONTABILIDAD" id="ddlbCONTABILIDAD" style="width: 100%; height: 100%"></select>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="800px" valign="center" colspan="3">
+                        <table cellspacing="2" cellpadding="2" width="800px" border="0">
+                            <tbody>
+                                <tr><td><b>NOTA:</b></td></tr>
+                                <tr>
+                                    <td align="right">
+                                        <textarea id="COMENTARIO" name="COMENTARIO" style="WIDTH: 100%;" rows="2" cols="53"></textarea>
+                                        Llenar solo si hay algun tipo de Comentario o si ya tiene un Asiento Reservado
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr bordercolor="#F4F4F4"><td width="800px" valign="center" colspan="3" background='@Url.Content("~/Content/images/fondo_cabecera.jpg")'>&nbsp;</td></tr>
+                <tr bordercolor="#F4F4F4">
+                    <td background='@Url.Content("~/Content/images/fondo_cabecera.jpg")' width="800px" valign="center" align="center" height="40px" colspan="3">
+                        <input type="submit" value="Enviar" class="botones" id="cmdEnviar" name="cmdEnviar" title="Hacer Click para enviar Solicitud" style="WIDTH: 120px;">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="hidden" id="CCOSTOS" name="CCOSTOS" style="WIDTH: 0%; HEIGHT: 0%" title="Se llena en forma automática cuando se selecciona una Sección" readonly="" value="2345-7002-0000-0000-00-MIN307">
+    </form>
+
+
+</center>
+<script type="text/javascript" language="javascript">
+    var form = null;
+    function obtenerFechaDelSistem() {
+        var fecha = new Date();
+        var dia = fecha.getDate();
+        var mes = fecha.getMonth();
+        var anio = fecha.getFullYear();
+        var mesString = "";
+        switch (mes) {
+            case 0:
+                mesString = "Enero"; break;
+            case 1:
+                mesString = "Febrero"; break;
+            case 2:
+                mesString = "Marzo"; break;
+            case 3:
+                mesString = "Abril"; break;
+            case 4:
+                mesString = "Mayo"; break;
+            case 5:
+                mesString = "Junio"; break;
+            case 6:
+                mesString = "Julio"; break;
+            case 7:
+                mesString = "Agosto"; break;
+            case 8:
+                mesString = "Setiembre"; break;
+            case 9:
+                mesString = "Octubre"; break;
+            case 10:
+                mesString = "Noviembre"; break;
+            case 11:
+                mesString = "Diciembre"; break;
+        }
+
+        return String(dia < 10 ? "0" + dia : dia) + " de " + mesString + " del " + String(anio);
+    }
+    function Quitar1() {
+        var sigbus = true;
+        var nLen = 0;
+        var tabla = document.getElementById("mitabla1");
+        //console.log(tabla.rows[0].cells[0].firstChild);
+        var check = document.getElementsByName("checkbox1");
+        var filaAEliminar = 0;
+        while (sigbus) {
+            nLen = check.length;
+            for (var i = 0; i < nLen; i++) {
+                if (check[i].checked == true) {
+                    filaAEliminar = check[i].parentNode.parentNode.rowIndex;
+                    tabla.deleteRow(filaAEliminar);
+                    sigbus = true;
+                    i = parseInt(nLen) + 1;
+                }
+            }
+            if (i <= nLen) {
+                sigbus = false;
+            }
+            frmPasajes.CANTPASAJEROS.value = tabla.rows.length - 1;
+        }
+
+    }
+
+    function Agregar1() {
+        var concadenar;
+        var newcad;
+        var tabla = document.getElementById("mitabla1");
+        var numfilas = tabla.rows.length;
+        var rows = tabla.insertRow(numfilas);
+        var cell0 = rows.insertCell(0).innerHTML = "<input type='checkbox' id='checkbox1' name='checkbox1' />";
+        var cell1 = rows.insertCell(1).innerHTML = "<input type='text' id='TXTPASAJERO' name='TXTPASAJERO' maxlength='80' style='width: 100%'/>";
+        var cell2 = rows.insertCell(2).innerHTML = "<input type='text' id='TXTDNI' name='TXTDNI' maxlength='8' style='width: 100%' />";
+        frmPasajes.CANTPASAJEROS.value = numfilas - 1
+    }
+
+    function ajax(url, tipoMetodo, tipoRpta, metodo, parametrosUrl) {
+
+        var xhr = new XMLHttpRequest();
+        xhr.open(tipoMetodo, url, true);
+        if (tipoMetodo == "post") xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
+        xhr.responseType = tipoRpta;
+        xhr.onreadystatechange = function () {
+            if (xhr.status == 200 && xhr.readyState == 4) {
+                if (tipoRpta == "" || tipoRpta == "text") {
+                    metodo(xhr.responseText, true);
+                }
+                else {
+                    metodo(xhr.response);
+                }
+            }
+        }
+        if (tipoMetodo == "post") {
+            xhr.send(parametrosUrl);
+        } else {
+            xhr.send();
+        }
+    }
+
+    window.onload = function () {
+        //var btnEnviar=document.getElementById("cmdEnviar");
+        var imagen = '@Url.Content("~/Content/images/fondo_cabecera.jpg")';
+        document.body.style.background = "url('" + imagen + "')";
+        document.getElementById("fechaSistem").innerHTML = obtenerFechaDelSistem();
+        listarSedes();
+        mostrarDias();
+        listarAprobadores();
+        ccostos();
+    };
+    document.getElementById("cmdEnviar").addEventListener("click", function (e) {
+        e.preventDefault();
+        Enviar();
+    });
+     
+    function listarSedes() {
+        var urlAction = '@Url.Content("~/Solicitud/listarTodasLasSedes")';
+        ajax(urlAction, "get", "json", function (response) {
+            if (response != "") {
+                var ddlb_listado = document.getElementById("ddlbAREAS");
+                //var optionDefecto = document.createElement("option");
+                //optionDefecto.value = "0";
+                //optionDefecto.innerHTML = "-- Elija un Sede --";
+                //ddlb_listado.appendChild(optionDefecto);  
+                var dataResponse = response;
+                if (typeof (response) == "string" || typeof (response) == "undefined") {
+                    dataResponse = JSON.parse(response);
+                }                 
+                for (var i = 0 ; i < Object.keys(dataResponse.listadoSedes).length; i++) {
+                    var option = document.createElement("option");
+                    option.value = dataResponse.listadoSedes[i].Idarea;
+                    option.innerText = dataResponse.listadoSedes[i].Descripcion;
+                    ddlb_listado.appendChild(option);
+                }
+                ddlb_listado[0].selected = true;
+                ddlb_listado.selectedIndex = 0;
+                CambiarSede(ddlb_listado.options[0].value);
+            }
+        }, null);
+    }
+    function CambiarSede(value) {
+        var param = "?area=" + value;
+        var urlAction = '@Url.Content("~/Solicitud/listarTodasLasAreas")' + param;
+        ajax(urlAction, "get", "json", function (response) {
+            var ddlb_listado = document.getElementById("ddlbSECCION");
+            if (ddlb_listado.length > 0) ddlb_listado.innerHTML = "";
+            if (response != "") {
+                var dataResponse = response;
+                if (typeof (response) == "string" || typeof (response) == "undefined") {
+                    dataResponse = JSON.parse(response);
+                }
+                for (var i = 0 ; i < Object.keys(dataResponse.listadoAreas).length; i++) {
+                    var option = document.createElement("option");
+                    option.value = dataResponse.listadoAreas[i].Idcc;
+                    option.innerText = dataResponse.listadoAreas[i].Descripcion;
+                    ddlb_listado.appendChild(option);
+                }
+                ddlb_listado[0].selected = true;
+                ddlb_listado.selectedIndex = 0;
+                CambiarArea(ddlb_listado.options[0].value);
+            }
+        }, null);
+    }
+
+    function CambiarArea(value) {
+        var param = "?idarea=" + value;
+        var urlAction = '@Url.Content("~/Solicitud/listarCostos")' + param;
+        ajax(urlAction, "get", "json", function (response) {
+            var ddlb_listado = document.getElementById("ddlbCOSTOS");
+            if (ddlb_listado.length > 0) ddlb_listado.innerHTML = "";
+            if (response != "") {
+                var dataResponse = response;
+                if (typeof (response) == "string" || typeof (response) == "undefined") {
+                    dataResponse = JSON.parse(response);
+                }
+                for (var i = 0 ; i < Object.keys(dataResponse.listadoCostos).length; i++) {
+                    var option = document.createElement("option");
+                    option.value = dataResponse.listadoCostos[i].IdCombinacion;
+                    option.innerText = dataResponse.listadoCostos[i].Descripcion;
+                    ddlb_listado.appendChild(option);
+                }
+                ddlb_listado[0].selected = true;
+                ddlb_listado.selectedIndex = 0;
+                listarCostos();
+            }
+
+        }, null);
+    }
+
+    function listarCostos() {
+        var urlAction = '@Url.Content("~/Solicitud/listarCuenta")';
+        ajax(urlAction, "post", "json", function (response) {
+            var ddlb_listado = document.getElementById("ddlbCUENTA");
+            if (ddlb_listado.length > 0) ddlb_listado.innerHTML = "";
+            if (response != "") {
+                var dataResponse = response;
+                if (typeof (response) == "string" || typeof (response) == "undefined") {
+                    dataResponse = JSON.parse(response);
+                }
+                for (var i = 0 ; i < Object.keys(dataResponse.listadoCuenta).length; i++) {
+                    var option = document.createElement("option");
+                    option.value = dataResponse.listadoCuenta[i].IdCuenta;
+                    option.innerText = dataResponse.listadoCuenta[i].Descripcion;
+                    ddlb_listado.appendChild(option);
+                }
+                ddlb_listado[0].selected = true;
+                ddlb_listado.selectedIndex = 0;
+                listarEmpresas();
+            }
+        }, null);
+    }
+    function listarEmpresas() {
+        var urlAction = '@Url.Content("~/Solicitud/listarEmpresas")';
+        ajax(urlAction, "get", "json", function (response) {
+            var ddlb_listado = document.getElementById("ddlbEMPRESA");
+            if (ddlb_listado.length > 0) ddlb_listado.innerHTML = "";
+            if (response != "") {
+                var dataResponse = response;
+                if (typeof (response) == "string" || typeof (response) == "undefined") {
+                    dataResponse = JSON.parse(response);
+                } 
+                for (var i = 0 ; i < Object.keys(dataResponse.listadoEmpresas).length; i++) {
+                    var option = document.createElement("option");
+                    option.value = dataResponse.listadoEmpresas[i].IdEmpresa;
+                    option.innerText = dataResponse.listadoEmpresas[i].Descripcion;
+                    ddlb_listado.appendChild(option);
+                }
+                ddlb_listado.options.selectedIndex = 0
+                ddlb_listado.options[ddlb_listado.options.selectedIndex].setAttribute("selected", "selected");
+                CambiarRuta(ddlb_listado.options[0].value);
+            }
+        }, null);
+    }
+    function CambiarRuta(value) {
+        var param = "?idempresa=" + value;
+        var urlAction = '@Url.Content("~/Solicitud/listarRutasDeOrigen")' + param;
+        ajax(urlAction, "get", "json", function (response) {
+            var ddlb_listado = document.getElementById("ddlbORIGEN");
+            if (ddlb_listado.length > 0) ddlb_listado.innerHTML = "";
+            if (response != "") {
+                var dataResponse = response;
+                if (typeof (response) == "string" || typeof (response) == "undefined") {
+                    dataResponse = JSON.parse(response);
+                }
+                for (var i = 0 ; i < Object.keys(dataResponse.listaRutaOrigen).length; i++) {
+                    var option = document.createElement("option");
+                    option.value = dataResponse.listaRutaOrigen[i].Origen;
+                    option.innerText = dataResponse.listaRutaOrigen[i].Origen;
+                    ddlb_listado.appendChild(option);
+                }
+                ddlb_listado.options.selectedIndex = 0
+                ddlb_listado.options[ddlb_listado.options.selectedIndex].setAttribute("selected", "selected");
+                var idEmpresa = document.getElementById("ddlbEMPRESA").options[0].value;
+                var origen = ddlb_listado.options[0].value;
+                CambiarDestino(origen, idEmpresa);
+            }
+
+        }, null);
+    }
+    function CambiarDestino(origen, idempresa) {
+        var param = "?origen=" + origen + "&idempresa=" + idempresa;
+        var urlAction = '@Url.Content("~/Solicitud/listarRutasDeDestino")' + String(param);
+        ajax(urlAction, "get", "json", function (response) {
+            var ddlb_listado = document.getElementById("ddlbDESTINO");
+            if (ddlb_listado.length > 0) ddlb_listado.innerHTML = "";
+            if (response != "") {
+                var dataResponse = response;
+                if (typeof (response) == "string" || typeof (response) == "undefined") {
+                    dataResponse = JSON.parse(response);
+                }
+                for (var i = 0 ; i < Object.keys(dataResponse.listaRutaDestino).length; i++) {
+                    var option = document.createElement("option");
+                    option.value = dataResponse.listaRutaDestino[i].Destino;
+                    option.innerText = dataResponse.listaRutaDestino[i].Destino;
+                    ddlb_listado.appendChild(option);
+                }
+                ddlb_listado.options.selectedIndex = 0
+                ddlb_listado.options[ddlb_listado.options.selectedIndex].setAttribute("selected", "selected");
+                var destino = ddlb_listado.options[0].value;
+                CambiarHorario(origen, destino, idempresa);
+            }
+
+        }, null);
+    }
+    function mostrarDias() {
+        var fecha = new Date();
+        var listaDias = listarDias();
+        var listaMeses = listarMes();
+        var listaAnios = listarAnios();
+        var diaActual = fecha.getDate();
+        var mesActual = fecha.getMonth();
+        var ddlb_listadoDias = document.getElementById("ddlbDIASALIDA");
+        var ddlb_listaMeses = document.getElementById("ddlbMESSALIDA");
+        var ddlb_listaAnios = document.getElementById("ddlbANIOSALIDA");
+
+        var ddlb_diaRetorno = document.getElementById("ddlbDIARETORNO");
+        var ddlb_mesRetorno = document.getElementById("ddlbMESRETORNO");
+        var ddlb_AnioRetorno = document.getElementById("ddlbANIORETORNO");
+
+        if (ddlb_listadoDias.length > 0) ddlb_listadoDias.innerHTML = "";
+        if (ddlb_listaMeses.length > 0) ddlb_listaMeses.innerHTML = "";
+
+        for (var i = 0 ; i < Object.keys(listaDias).length; i++) {
+            var option = document.createElement("option");
+            var optionDiaRetorno = document.createElement("option");
+            option.value = listaDias[i].valorDia;
+            option.innerText = listaDias[i].textoDia;
+            optionDiaRetorno.value = listaDias[i].valorDia;
+            optionDiaRetorno.innerText = listaDias[i].textoDia;
+            ddlb_listadoDias.appendChild(option);
+            ddlb_diaRetorno.appendChild(optionDiaRetorno);
+            if (i == diaActual) {
+                ddlb_listadoDias.selectedIndex = (i - 1);   //o tambien ddlb_listadoDias.options.selectedIndex  =7
+                ddlb_diaRetorno.selectedIndex = (i - 1);
+                ddlb_listadoDias.options[ddlb_listadoDias.options.selectedIndex].setAttribute("selected", "selected");
+                ddlb_diaRetorno.options[ddlb_diaRetorno.options.selectedIndex].setAttribute("selected", "selected");
+            }
+        }
+        for (var i = 0 ; i < Object.keys(listaMeses).length; i++) {
+            var optionMes = document.createElement("option");
+            var optionMesRetorno = document.createElement("option");
+            optionMes.value = listaMeses[i].valorMes;
+            optionMes.innerText = listaMeses[i].textoMes;
+            optionMesRetorno.value = listaMeses[i].valorMes;
+            optionMesRetorno.innerText = listaMeses[i].textoMes;
+            ddlb_listaMeses.appendChild(optionMes);
+            ddlb_mesRetorno.appendChild(optionMesRetorno);
+            if (i == mesActual) {
+                ddlb_listaMeses.options.selectedIndex = i;
+                ddlb_mesRetorno.options.selectedIndex = i;
+                ddlb_listaMeses.options[ddlb_listaMeses.options.selectedIndex].setAttribute("selected", "selected");
+                ddlb_mesRetorno.options[ddlb_mesRetorno.options.selectedIndex].setAttribute("selected", "selected");
+            }
+        }
+        for (var i = 0 ; i < Object.keys(listaAnios).length; i++) {
+            var option = document.createElement("option");
+            var optionAnioRetorno = document.createElement("option");
+            option.value = listaAnios[i].anioValor;
+            option.innerText = listaAnios[i].anioexto;
+            optionAnioRetorno.value = listaAnios[i].anioValor;
+            optionAnioRetorno.innerText = listaAnios[i].anioexto;
+            ddlb_listaAnios.appendChild(option);
+            ddlb_AnioRetorno.appendChild(optionAnioRetorno);
+        }
+    }
+
+    function HabiRetorno() {
+        if (frmPasajes.Check.checked == true) {
+            document.getElementById("ddlbDIARETORNO").disabled = false;
+            document.getElementById("ddlbMESRETORNO").disabled = false;
+            document.getElementById("ddlbANIORETORNO").disabled = false;
+            document.getElementById("ddlbHORARETORNO").disabled = false;
+        }
+        else {
+            document.getElementById("ddlbDIARETORNO").disabled = true;
+            document.getElementById("ddlbMESRETORNO").disabled = true;
+            document.getElementById("ddlbANIORETORNO").disabled = true;
+            document.getElementById("ddlbHORARETORNO").disabled = true;
+            document.getElementById("ddlbDIARETORNO").selectedIndex = 0;
+            document.getElementById("ddlbMESRETORNO").selectedIndex = 0;
+            document.getElementById("ddlbANIORETORNO").selectedIndex = 0;
+            document.getElementById("ddlbHORARETORNO").selectedIndex = 0;
+        }
+    }
+    function CambiarHorario(origen, destino, idempresa) {
+        var param = "?origen=" + origen + "&destino=" + destino + "&idempresa=" + idempresa;
+        var urlAction = '@Url.Content("~/Solicitud/listarHorarioDeSalida")' + String(param);
+        ajax(urlAction, "get", "json", function (response) {
+            var ddlb_listado = document.getElementById("ddlbHORASALIDA");   
+            if (ddlb_listado.length > 0) ddlb_listado.innerHTML = "";
+            if (response != "") {
+                var dataResponse = response;
+                if (typeof (response) == "string" || typeof (response) == "undefined") {
+                    dataResponse = JSON.parse(response);
+                }
+                for (var i = 0 ; i < Object.keys(dataResponse.listaHoraSalida).length; i++) {
+                    var option1 = document.createElement("option");  
+                    option1.value = dataResponse.listaHoraSalida[i].HoraStringValor;
+                    option1.innerText = dataResponse.listaHoraSalida[i].HoraString + dataResponse.listaHoraSalida[i].Nota;
+                    ddlb_listado.appendChild(option1);    
+                }
+                ddlb_listado.options.selectedIndex = 0
+                ddlb_listado.options[ddlb_listado.options.selectedIndex].setAttribute("selected", "selected");
+                CambiarHorarioRetorno(origen, destino, idempresa);
+            }
+
+        }, null);
+    }
+    function CambiarHorarioRetorno(origen, destino, idempresa) {
+        var param = "?origen=" + destino + "&destino=" + origen + "&idempresa=" + idempresa;
+        var urlAction = '@Url.Content("~/Solicitud/listarHorarioDeSalida")' + String(param);
+        ajax(urlAction, "get", "json", function (response) {
+            var ddlb_listado = document.getElementById("ddlbHORARETORNO"); 
+            if (ddlb_listado.length > 0) ddlb_listado.innerHTML = "";
+            if (response != "") {
+                var dataResponse = response;
+                if (typeof (response) == "string" || typeof (response) == "undefined") {
+                    dataResponse = JSON.parse(response);
+                }
+                for (var i = 0 ; i < Object.keys(dataResponse.listaHoraSalida).length; i++) {
+                    var option1 = document.createElement("option");  
+                    option1.value = dataResponse.listaHoraSalida[i].HoraStringValor;
+                    option1.innerText = dataResponse.listaHoraSalida[i].HoraString + dataResponse.listaHoraSalida[i].Nota;
+                    ddlb_listado.appendChild(option1);   
+                }
+                ddlb_listado.options.selectedIndex = 0
+                ddlb_listado.options[ddlb_listado.options.selectedIndex].setAttribute("selected", "selected");
+            }
+
+        }, null);
+    }
+    function listarAprobadores() {
+        var urlAction = '@Url.Content("~/Solicitud/listarAprobadores")';
+        ajax(urlAction, "get", "json", function (response) {
+            var ddlb_listado = document.getElementById("ddlbAPROBADO");
+            var ddlb_listadoAprobadorAutomatico = document.getElementById("ddlbCONTABILIDAD");
+            if (ddlb_listado.length > 0) ddlb_listado.innerHTML = "";
+            if (ddlb_listadoAprobadorAutomatico.length > 0) ddlb_listadoAprobadorAutomatico.innerHTML = "";
+            if (response != "") {
+                var dataResponse = response;
+                if (typeof (response) == "string" || typeof (response) == "undefined") {
+                    dataResponse = JSON.parse(response);
+                }
+                for (var i = 0 ; i < Object.keys(dataResponse.listaAprobadores).length; i++) {
+                    var option = document.createElement("option");
+                    option.value = dataResponse.listaAprobadores[i].IdAprobador;
+                    option.innerText = dataResponse.listaAprobadores[i].Nombre;
+                    ddlb_listado.appendChild(option);
+                }
+                ddlb_listado.options.selectedIndex = 0
+                ddlb_listado.options[ddlb_listado.options.selectedIndex].setAttribute("selected", "selected");
+
+                for (var x = 0 ; x < Object.keys(dataResponse.listaAprobadoAutomatico).length; x++) {
+                    var option = document.createElement("option");
+                    option.value = dataResponse.listaAprobadoAutomatico[x].IdAprobador;
+                    option.innerText = dataResponse.listaAprobadoAutomatico[x].Nombre;
+                    ddlb_listadoAprobadorAutomatico.appendChild(option);
+                }
+            }
+
+        }, null);
+    }
+    function ccostos() {
+        var ddlbcostos = document.getElementById("ddlbCOSTOS");
+        var txtCCOSTOS = document.getElementById("CCOSTOS");
+        if (ddlbcostos.selectedIndex >= 0) {   
+            txtCCOSTOS.value = ddlbcostos.options[ddlbcostos.selectedIndex].text;
+        }
+
+    }
+      
+    function Enviar() {
+
+        var tabla = document.getElementById("mitabla1");
+        diaSalida = frmPasajes.DIASALIDA.options[frmPasajes.DIASALIDA.selectedIndex].text;
+        mesSalida = frmPasajes.MESSALIDA.options[frmPasajes.MESSALIDA.selectedIndex].value;
+        anoSalida = frmPasajes.ANIOSALIDA.options[frmPasajes.ANIOSALIDA.selectedIndex].text;
+        diaRetorno = frmPasajes.DIARETORNO.options[frmPasajes.DIARETORNO.selectedIndex].text;
+        mesRetorno = frmPasajes.MESRETORNO.options[frmPasajes.MESRETORNO.selectedIndex].value;
+        anoRetorno = frmPasajes.ANIORETORNO.options[frmPasajes.ANIORETORNO.selectedIndex].text;
+        if (frmPasajes.AREAS.value == "") {
+            alert("Debe ingresar una Sede");
+            frmPasajes.AREAS.focus();
+            return false;
+        }
+        if (frmPasajes.SECCION.value == "") {
+            alert("Debe ingresar una Area");
+            frmPasajes.SECCION.focus();
+            return false;
+        }
+        if (frmPasajes.COSTOS.value == "") {
+            alert("Debe ingresar un Centro de Costos");
+            frmPasajes.COSTOS.focus();
+            return false;
+        }
+        if (frmPasajes.EMPRESA.value == "") {
+            alert("Debe ingresar la Empresa de Transporte");
+            frmPasajes.EMPRESA.focus();
+            return false;
+        }
+        if (frmPasajes.ORIGEN.value == "Nulo") {
+            alert("Debe Elegir una ciudad de Origen");
+            frmPasajes.ORIGEN.focus();
+            return false;
+        }
+        if (frmPasajes.DESTINO.value == "Nulo") {
+            alert("Debe Elegir una ciudad de Destino");
+            frmPasajes.DESTINO.focus();
+            return false;
+        }
+        if (frmPasajes.ORIGEN.value == frmPasajes.DESTINO.value) {
+            alert("El lugar de Destino no puede ser el mismo que el de Origen");
+            frmPasajes.DESTINO.focus();
+            return false;
+        }
+
+        if (ValidarFecha(diaSalida, mesSalida, anoSalida) == false) {
+            alert("Debe elegir una fecha de Salída válida");
+            frmPasajes.ddlbDIASALIDA.focus();
+            return false;
+        }
+
+        var FechaIngresada = new Date(parseInt(anoSalida), parseInt(mesSalida) - 1, parseInt(diaSalida) + 1);
+        var FechaServer = new Date();
+
+        if (FechaIngresada <= FechaServer) {
+            alert("La Fecha de Salida no puede ser anterior a la fecha actual");
+            frmPasajes.ddlbDIASALIDA.focus();
+            return false;
+        }
+
+        if (frmPasajes.HORASALIDA.value == "Nulo") {
+            alert("Debe elegir una hora de Salída");
+            frmPasajes.HORASALIDA.focus();
+            return false;
+        }
+        if (frmPasajes.Check.checked == true) {
+            if (ValidarFecha(diaRetorno, mesRetorno, anoRetorno) == false) {
+                alert("Debe elegir una fecha de Retorno válida");
+                frmPasajes.DIARETORNO.focus();
+                return false;
+            }
+
+            var FechaSalida = new Date(parseInt(anoSalida), parseInt(mesSalida) - 1, parseInt(diaSalida));
+            var FechaRetorno = new Date(parseInt(anoRetorno), parseInt(mesRetorno) - 1, parseInt(diaRetorno));
+
+            if (FechaSalida > FechaRetorno) {
+                alert("La Fecha de Retorno no puede ser anterior a la fecha Salida");
+                frmPasajes.DIARETORNO.focus();
+                return false;
+            }
+            if (frmPasajes.HORARETORNO.value == "Nulo") {
+                alert("Debe elegir una hora de Retorno");
+                frmPasajes.HORARETORNO.focus();
+                return false;
+            }
+        }
+        if (frmPasajes.MOTIVO.value == "") {
+            alert("Debe ingresar un motivo porque se esta realizando el viaje");
+            frmPasajes.MOTIVO.focus();
+            frmPasajes.MOTIVO.className = "error";
+            return false;
+        } else frmPasajes.MOTIVO.className = "";
+        if (tabla.tBodies[0].getElementsByTagName("tr").length == 0) {
+            alert("No ha ingresado ningún pasajero");
+            frmPasajes.Agregar_1.focus();
+            return false;
+        }
+        if (tabla.tBodies[0].getElementsByTagName("tr").length > 0) {
+            var inputPasajero = document.getElementsByName("TXTPASAJERO");
+            var inputDni = document.getElementsByName("TXTDNI");
+            var regValidaNombre = /^[A-ZñÑáéíóúÁÉÍÓÚa-z ]+$/;
+            var regValidaNumero = /^([0-9]{8,8})$/;
+            var regVacio = /^\s*$/;
+            for (var i = 0; i < tabla.tBodies[0].getElementsByTagName("tr").length; i++) {
+                if ((inputPasajero[i].value == null || regVacio.test(inputPasajero[i].value)) || !regValidaNombre.test(inputPasajero[i].value)) {
+                    alert("Ingrese el nombre del Pasajero " + (eval(i) + eval(1)));
+                    inputPasajero[i].focus();
+                    inputPasajero[i].className = "error";
+                    return false;
+                } else inputPasajero[i].className = "";
+                if (!regValidaNumero.test(inputDni[i].value) || regVacio.test(inputPasajero[i].value)) {
+                    alert("Ingrese el DNI del Pasajero " + (eval(i) + eval(1)));
+                    inputDni[i].focus();
+                    inputDni[i].className = "error";
+                    return false;
+                } else inputDni[i].className = "";
+            }
+        }
+
+        if (frmPasajes.APROBADO.value == "Nulo") {
+            alert("Debe elegir una Persona autorizada para que apruebe esta Solicitud");
+            frmPasajes.APROBADO.focus();
+            return false;
+        }
+        if (frmPasajes.CONTABILIDAD.value == "Nulo") {
+            alert("Debe elegir un representante de Contabilidad para que de VªBª a su Solicitud");
+            frmPasajes.CONTABILIDAD.focus();
+            return false;
+        }
+        if (frmPasajes.APROBADO.options[frmPasajes.APROBADO.selectedIndex].text == "@sessionSolicitante") {
+            alert("El aprobador no puede ser el mismo que el solicitante");
+            frmPasajes.APROBADO.focus();
+            return false;
+        }  
+        var ddlbJob = document.getElementById("ddlbCOSTOS");
+        var detallePasajes = [];
+        var inputNombrePasajero = document.getElementsByName("TXTPASAJERO");
+        var inputDniPasajero = document.getElementsByName("TXTDNI");
+        var mesSalida = document.getElementById("ddlbMESSALIDA").value < 10 ? '0' + document.getElementById("ddlbMESSALIDA").value : document.getElementById("ddlbMESSALIDA").value;
+        var ddSalida = document.getElementById("ddlbDIASALIDA").value;
+        var fechaSalida = document.getElementById("ddlbANIOSALIDA").value + '-' + String(mesSalida) + '-' + String(ddSalida);
+        var objPasajes = {
+            "Idcc": parseInt(document.getElementById("ddlbCOSTOS").value)
+            , "Cuenta": parseInt(document.getElementById("ddlbCUENTA").value)
+            , "Job": ddlbJob.options[ddlbJob.selectedIndex].text
+            , "Empresa": parseInt(document.getElementById("ddlbEMPRESA").value)
+            , "Origen": document.getElementById("ddlbORIGEN").value
+            , "Destino": document.getElementById("ddlbDESTINO").value
+            , "FechaSalidaString": String(fechaSalida)
+            , "HoraSalidaString": document.getElementById("ddlbHORASALIDA").value
+            , "FechaRetornoString": String(document.getElementById("ddlbANIORETORNO").value) + '-' + String(document.getElementById("ddlbMESRETORNO").value) + '-' + String(document.getElementById("ddlbDIARETORNO").value)
+            , "HoraRetornoString": document.getElementById("ddlbHORARETORNO").value
+            , "Motivo": document.getElementById("txtMOTIVO").value
+            , "Solicitante": document.getElementById("txtSolicitante").value
+            , "MailSolicitante": ""
+            , "CodigoJefe": document.getElementById("ddlbAPROBADO").value
+            , "CodigoContabilidad": document.getElementById("ddlbCONTABILIDAD").value
+            , "Aprobado": parseInt("0")
+            , "Condicion": parseInt("0")
+            , "Nota": document.getElementById("COMENTARIO").value
+        };
+        for (var x = 0; x < tabla.tBodies[0].getElementsByTagName("tr").length; x++) {
+            detallePasajes.push({
+                NomPasajero: inputNombrePasajero[x].value
+                , DocIdentidad: inputDniPasajero[x].value
+            });
+        }    
+        var tieneFechaRetorno = false;
+        if (document.getElementById("chkCheck").checked == true) tieneFechaRetorno = true;
+        var strigPasaje = objPasajes.Idcc.toString() + "|" + objPasajes.Cuenta + "|" + objPasajes.Job + "|"
+            + objPasajes.Empresa + "|" + objPasajes.Origen + "|" + objPasajes.Destino + "|" + objPasajes.FechaSalidaString + "|"
+            + objPasajes.HoraSalidaString + "|" + objPasajes.FechaRetornoString + "|" + objPasajes.HoraRetornoString + "|"
+            + objPasajes.Motivo + "|" + objPasajes.Solicitante + "|" + objPasajes.MailSolicitante + "|" + objPasajes.CodigoJefe + "|"
+            + objPasajes.CodigoContabilidad + "|" + objPasajes.Aprobado.toString() + "|" + objPasajes.Condicion + "|" + objPasajes.Nota + "|" + tieneFechaRetorno.toString();
+        var strigDetalle = "";
+        for (var y = 0; y < Object.keys(detallePasajes).length; y++) {
+            strigDetalle += detallePasajes[y].NomPasajero + "|" + detallePasajes[y].DocIdentidad + "#";
+        }
+        var urlAction = '@Url.Content("~/Solicitud/insertarPasajes")';
+        var param = "pasajeString=" + strigPasaje + "&DetalleString=" + strigDetalle.substring(0, strigDetalle.length - 1);
+        var navegador = navigator.userAgent.toLowerCase().indexOf('opera') > -1 || navigator.userAgent.toLowerCase().indexOf('firefox') > -1 || navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+        document.getElementById("divLoading").style.display = "block";
+        ajax(urlAction, "post", "json", function (response) {
+            if (response != "") { //&& response.PasajeInsertado>0
+                document.getElementById("divLoading").style.display = "none";
+                if (navegador) {
+                    document.location.reload(true);
+                } else {
+                    window.location.reload();
+                }
+            }
+        }, param);
+
+    }
+</script>

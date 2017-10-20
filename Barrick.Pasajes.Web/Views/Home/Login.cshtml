@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Login";    
+    var Vali = ViewBag.Vali;
+}
+<link href='@Url.Content("~/Content/css/petitorio.css")' type="text/css" rel="stylesheet" />
+<script type="text/javascript" src='@Url.Content("~/Content/script/Scripts.js")'></script>
+<table border=0 cellPadding="0" cellSpacing="0" width="90%" align=center>
+    <tr>
+        <td width="20%"><IMG height=43 src='@Url.Content("~/Content/images/barrick_blanco.gif")' width=75></td>
+        <td width="33%">
+            <p align="center">
+                <b>
+                    <font size="4">
+                        Minera Barrick Misquichilca
+                        <br>
+                    </font><font size="3">Sistema de Pasajes</font>
+                </b>
+            </p>
+        </td>
+        <td width="20%" align="right"><img style="WIDTH: 126px; HEIGHT: 44px" height=46 src='@Url.Content("~/Content/images/movil_blanco.gif")' width=131></td>
+    </tr>
+    <tr>
+        <td width="20%"></td>
+        <td width="33%">
+            <br><br>
+            <p align="justify">
+                Bienvenidos al Sistema de Pasajes, éste nos permitirá solicitar
+                pasajes terrestres al personal de Minera Barrick Misquichilca, así también permitirá
+                acelerar las etapas de aprobación de las mismas
+            </p>
+        </td>
+        <td width="20%"></td>
+    </tr>
+    <tr>
+        <td width="20%"></td>
+        <td width="33%">
+            @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { name = "login", id = "login",  onsubmit = "return Enviar();" }))
+            {
+                <table border="0" cellPadding="0" cellSpacing="0" height="102" width="100%">
+                    <tr>
+                        <td bgColor="#006699" height="24" width="26%">&nbsp;</td>
+                        <td bgColor="#006699" height="24" width="49%"><p align="center"><b><font color="#ffffff">Ingreso al Sistema</font></b></p></td>
+                        <td bgColor="#006699" height="24" width="25%">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td height="30" width="26%" valign="center"><b>&nbsp;Usuario:</b></td>
+                        <td height="30" width="49%" valign="center"><p align="center"><input name="txtUser"></p></td>
+                        <td height="30" width="25%" valign="center"></td>
+                    </tr>
+                    <tr>
+                        <td height="45" width="26%" valign="top"><b>&nbsp;Password:</b></td>
+                        <td height="45" width="49%" valign=top><p align="center">
+                            <input name="txtPassword" type="password" />
+                            <br><a title="Ingresa tu Usuario y haz Click aquí para que el Sistema envíe tu password a tu email" 
+                                   href="JavaScript:Pass()"><font color="green">Enviarme el Password</font></a></p>
+                        </td>
+                        <td height="45" width="25%"></td>
+                    </tr>
+                    <tr>
+                        <td bgColor="#006699" height="27" width="26%"></td>
+                        <td bgColor="#006699" height="27" width="49%"><p align="center"><input name="entrar" type="submit" value="ENTRAR" style="WIDTH: 110px; HEIGHT: 22px"></p></td>
+                        <td bgColor="#006699" height="27" width="25%"></td>
+                    </tr>
+                    <tr>
+                        <td align=right colSpan=3>
+                            <a title="Ingresa tu Usuario y haz Click aquí para Cambiar tu Password"
+                               href="JavaScript:CambioPass()"><font color=green>Cambio de Password</font></a>
+                            <P></P>
+                        </td>
+                    </tr>
+                    @{if (Vali == "2")
+                        {
+                            <tr><td colspan="3" align="middle"><font color="red">Error el Usuario o Password es Incorrecto</font></td></tr>
+                        }
+                        else if (Vali == "1")
+                        {
+                            <tr>
+                                <td colspan="3" align="middle"><font color="red">Usuario Inhabilitado, Contactese con el Administrador del Portal</font></td>
+                            </tr>
+
+                        }
+                    }
+                </table>
+                        }
+        </td>
+        <td width="20%"></td>
+    </tr>
+</table>
+<script type="text/javascript">
+    window.onload = function () {
+        var imagen = '@Url.Content("~/Content/images/accounting_fondo.jpg")';
+        document.body.style.background = "url('" + imagen + "')";
+    };
+    function Pass() {
+        var regVacio = /^\s*$/;
+        if (login.txtUser.value == "" || regVacio.test(login.txtUser.value)) {
+            alert("Ingresa tu Usuario para que el Sistema envíe tu password a tu email");
+            login.txtUser.focus();
+        } else {
+            var url = '@Url.Content("~/Home/RecuperarContrasenia")' + "?user=" + login.txtUser.value;
+            window.open(url, "EnvioPass", "toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=450,top=50,left=150");
+        }   
+    }
+
+    function CambioPass() {
+        if (login.txtUser.value == "") {
+            alert("Ingresa tu Usuario para poder cambiar tu password");
+            login.txtUser.focus();
+        } else {
+            var url = '@Url.Content("~/Home/CambiarPassword?user=")' + String(login.txtUser.value);
+            window.open(url, "CambioPass", "toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=450,top=50,left=150");
+        }
+
+    }
+
+    function Enviar() {
+        if (login.txtUser.value == "") {
+            alert("Ingresar por favor tu Usuario");
+            login.txtUser.focus();
+            return false;
+        }
+        if (login.txtPassword.value == "") {
+            alert("Ingresar por favor tu Password");
+            login.txtPassword.focus();
+            return false;
+        }
+        else
+            return true;
+    }
+</script>

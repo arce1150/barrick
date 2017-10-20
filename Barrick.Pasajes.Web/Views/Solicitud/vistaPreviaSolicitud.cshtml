@@ -1,0 +1,201 @@
+﻿@model Barrick.Pasajes.BusinessEntity.PasajesTerrestresBe
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href='http://perlimas4/finances/Scripts/Petitorio.css'>
+    <script language=javascript src='http://perlimas4/finances/Scripts/Scripts.js'></script>
+</head>
+<body background='http://perlimas4/finances/images/fondo_cabecera.jpg'>
+    <table name=tabla1 cellSpacing='0' cellPadding='5' width='650' border='2' bgcolor='aliceblue' align='center'>
+        <tr bordercolor=#f4f4f4>
+            <td background='http://perlimas4/finances/images/fondo_cabecera.jpg' Width='124' vAlign='center' align='middle'>
+                <img height=43 src='@Url.Content("~/Content/images/barrick_blanco.gif")' width="75" border="0" />
+            </td>
+            <th background='http://perlimas4/finances/images/fondo_cabecera.jpg' Width='526' vAlign='top'>
+                <font size='4'><br>MINERA BARRICK MISQUICHILCA S.A<br>Solicitud de Pasajes Terrestre<br><br></font>
+            </th>
+            <td background='http://perlimas4/finances/images/fondo_cabecera.jpg' Width='124' vAlign='center' align='middle'>
+                <img height=43 src='@Url.Content("~/Content/images/barrick_blanco.gif")' width="75">
+            </td>
+        </tr>
+    </table>
+    <table cellSpacing='0' cellPadding='5' width='650' border='2' bgcolor='aliceblue' align='center'>
+        <tr bordercolor=#f4f4f4>
+            <td Width='650' background='http://perlimas4/finances/images/fondo_cabecera.jpg' vAlign='center' colspan='3'>
+                <table cellSpacing='0' cellPadding='5' width='650' border='2' bgcolor='aliceblue' align='center'>
+                    <tr>
+                        <td Width='650' vAlign='center' colspan='3'>
+                            <table cellSpacing='2' cellPadding='2' width='650' border='1'>
+                                <tr>
+                                    <td Width='30%' bordercolor='aliceblue'><b>Nº SOLICITUD:&nbsp;@Model.Idregistro</b></td>
+                                    <td Width='40%' align='right' bordercolor='aliceblue'>
+                                        <b>FECHA DE SOLICITUD</b>
+                                    </td>
+                                    <td Width='30%' align='right' bgcolor='white'>
+                                        <font color='#4b0082'>
+                                            @{ 
+                                                var pos = Model.Fecha.ToLongDateString().IndexOf(',');
+                                                var total=Model.Fecha.ToLongDateString().Length - pos;
+                                                var fechaLarga = Model.Fecha.ToLongDateString().Substring(pos +1, total-1);
+                                            }
+                                            @fechaLarga    
+                                        </font>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td Width='650' vAlign='center' colspan='3'>
+                            <table cellSpacing='2' cellPadding='2' width='650' border='1'>
+                                <tr bgcolor='#006699'>
+                                    <td Width='35%' bordercolor='aliceblue'><font color='white'><b>AREA</b></font></td>
+                                    <td Width='35%' bordercolor='aliceblue'><font color='white'><b>SECCIÓN</b></font></td>
+                                    <td Width='30%' bordercolor='aliceblue'>
+                                        <font color='white'><b>CUENTA A CARGAR</b></font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td Width='35%' bgcolor='white'>
+                                        <font color='#4b0082'>@Model.Area</font>
+                                    </td>
+                                    <td Width='35%' bgcolor='white'><font color='#4b0082'>@Model.Seccion</font></td>
+                                    <td Width='30%' bgcolor='white'>
+                                        <font color='#4b0082'>@Model.Job</font>
+                                    </td>
+                                </tr>
+                                <tr bgcolor='#006699'>
+                                    <td Width='30%' bordercolor='aliceblue'>
+                                        <font color='white'><b>CANTIDAD DE PASAJEROS</b></font>
+                                    </td>
+                                    <td Width='70%' colspan='2' bordercolor='aliceblue'>
+                                        <font color='white'><b>EMPRESA DE TRANSPORTES</b></font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td Width='30%' bgcolor='white'><font color='#4b0082'>@Model.detallePasaje.Count</font></td>
+                                    <td Width='70%' colspan='2' bgcolor='white'><font color='#4b0082'>@Model.NombreEmpresa</font></td>
+                                </tr>
+                        </td>
+                    </tr>
+                </table>
+        <tr>
+            <td Width='650' vAlign='center' colspan='3'>
+                <table cellSpacing='2' cellPadding='2' width='650' border='1'>
+                    <tr>
+                        <td Width='100%' colspan='2' bgcolor='#006699' bordercolor='aliceblue'><font color='white'><b>RUTA</b></font></td>
+                    </tr>
+                    @if (Model.FechaRetorno == null)
+                    {
+                        <tr><td colspan=2 Width='50%' align='left' bgcolor='white'><font color='#4b0082'>@string.Concat(Model.Origen, "-", Model.Destino)</font></td></tr>
+                    }
+                    else
+                    {
+                        <tr><td colspan=2 Width='50%' align='left' bgcolor='white'><font color='#4b0082'>@string.Concat(Model.Origen, "-", Model.Destino, "-", Model.Origen)</font></td></tr>
+                    }
+                    <tr>
+                        <td Width='50%' align='left' bordercolor='aliceblue'><b>FECHA Y HORA DE SALIDA:</b></td>
+                        <td Width='50%' align='left' bordercolor='aliceblue'><b>FECHA Y HORA DE RETORNO</b></td>
+                    </tr>
+                    <tr>
+                        <td Width='50%' bgcolor='white'>
+                            <font color='#4b0082'>
+                                @*@string.Concat(Model.FechaSalida.Day.ToString().PadLeft(2, '0'), "-", Model.FechaSalida.Month.ToString().PadLeft(2, '0'), "-", Model.FechaSalida.Year.ToString(),
+                                                 ",", Model.HorSalida.Hour.ToString().PadLeft(2, '0'), ":", Model.HorSalida.Minute.ToString().PadLeft(2, '0'))
+                                    *@
+                                @Model.FechaSalida
+                        </font>
+                    </td>
+                    <td Width='50%' bgcolor='white'>
+                        <font color='#4b0082'>
+                            @if (Model.FechaRetorno != null && ((Model.FechaRetorno.Value.Day*1 + Model.FechaRetorno.Value.Month * 1+ Model.FechaRetorno.Value.Year * 1)!=3))
+                            {
+                                //string.Concat(Model.FechaRetorno.Value.Day.ToString().PadLeft(2, '0'), " - ", Model.FechaRetorno.Value.Month.ToString().PadLeft(2, '0'), "-", Model.FechaRetorno.Value.Year,
+                                //    ",", Model.HorRetorno.Value.Hour.ToString().PadLeft(2,'0'),":", Model.HorRetorno.Value.Minute.ToString().PadLeft(2,'0'));
+                                @Model.FechaRetorno.Value
+                            }       
+                        </font>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td Width='650' vAlign='center' colspan='3'>
+            <table cellSpacing='2' cellPadding='2' width='650' border='1'>
+                <tr>
+                    <td Width='100%' colSpan='3' bgcolor='#006699' bordercolor='aliceblue'>
+                        <font color='white'><b>MOTIVO DEL VIAJE</b></font>
+                    </td>
+                </tr>
+                <tr>
+                    <td Width='100%' Height='50' colSpan='3' bgcolor='white'>
+                        <font color='#4b0082'>@Model.Motivo</font>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td Width='650' vAlign='center' colspan='3'>
+            <table cellSpacing='2' cellPadding='2' width='650' border='1'>
+                <tr bgcolor='#006699'>
+                    <td Width='50%' align='left'>
+                        <font color='white' bordercolor='aliceblue'><b>NOMBRE DE PASAJERO</b></font>
+                    </td>
+                    <td Width='50%' align='left' bordercolor='aliceblue'>
+                        <font color='white'><b>DOCUMENTO DE IDENTIDAD</b></font>
+                    </td>
+                </tr>
+                @foreach (var item in Model.detallePasaje)
+                {
+                    <tr>
+                        <td bgcolor='white'>
+                            <font color='#4b0082'>@item.NomPasajero</font>
+                        </td>
+                        <td bgcolor='white'><font color='#4b0082'>@item.DocIdentidad</font></td>
+                    </tr>
+                }   
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td Width='650' vAlign='center' colspan='3'>
+            <table cellSpacing='2' cellPadding='2' width='650' border='1'>
+                <tr bgcolor='#006699'>
+                    <td Width='33%' bordercolor='aliceblue'><font color='white'><b>SOLICITADO POR</b></font></td>
+                    <td Width='33%' bordercolor='aliceblue'><font color='white'><b>APROBADO POR</b></font></td>
+                    <td Width='33%' bordercolor='aliceblue'>
+                        <font color='white'><b>CONTABILIDAD</b></font>
+                    </td>
+                </tr>
+                <tr>
+                    <td Width='33%' bgcolor='white'><font color='#4b0082'>@Model.Solicitante</font></td>
+                    <td Width='33%' bgcolor='white'>
+                        <font color='#4b0082'>@Model.Jefe</font>
+                    </td>
+                    <td Width='33%' bgcolor='white'><font color='#4b0082'>@Model.NombreConta</font></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td Width='650px' vAlign='center' colspan='3'>
+            <table cellSpacing='2' cellPadding='2' width='100%' border='1'>
+                <tr>
+                    <td valign='top' width='3%' bordercolor='aliceblue'><b>NOTA:</b></td>
+                    <td bgcolor='white'><font color='#4b0082'>@Model.Nota</font></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr bordercolor=#f4f4f4>
+        <td Width='650' background='http://perlimas4/finances/images/fondo_cabecera.jpg' vAlign='center' align='middle' Height='40' colspan='3'></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href='Petitorio.css'>
+    <script LANGUAGE=javascript src='Scripts.js'></script>
+</head>
+<body background='{fondo_cabecera}'>
+    <table name=tabla1 cellSpacing='0' cellPadding='5' width='800' border='2' bgcolor='aliceblue' align='center'>
+        <tr bordercolor=#f4f4f4>
+            <td  width='124' vAlign="center" align="middle">
+                <img height=43 src="{barrick_logo}" width='75' border='0' />
+            </td>
+            <th background='{fondo_cabecera.jpg}' Width='526' vAlign='top'>
+                <font size='4'><br>MINERA BARRICK MISQUICHILCA S.A<br>Solicitud de Pasajes Terrestre<br><br></font>
+            </th>
+            <td  width='124' vAlign='center' align='middle'>
+                <img height=43 src="{barrick_logo}" width="75" />
+            </td>
+        </tr>
+    </table>
+    <table cellSpacing='0' cellPadding='5' width='800' border='2' bgcolor='aliceblue' align='center'>
+        <tr bordercolor=#f4f4f4>
+            <td width='800' background='{fondo_cabecera}' vAlign='center' colspan='3'>
+                <table width='100%'>
+                    <tr>
+                        <td valign='top'><font color='red'><b>NOTA:&nbsp;&nbsp;</b></font></td>
+                        <td style="color:#4b0082"> <font color='red'><b>La presente solicitud debe ser Aprobada por el Supervisor Elegido para que pueda ser enviada a la Empresa de Transporte</b></font></td>
+                    </tr>
+                </table><br>
+            </td>
+        </tr>
+    </table>
+    <table cellSpacing='0' cellPadding='5' width='800' border='2px' bgcolor='aliceblue' align='center'>
+        <tr>
+            <td width='800' vAlign='center' colspan='3'>
+                <table cellSpacing='2' cellPadding='2' width='800' border='1'>
+                    <tr>
+                        <td Width='30%' bordercolor='aliceblue'><b>NRO SOLICITUD:&nbsp;{NRO_REGISTRO}</b></td>
+                        <td Width='40%' align='right' bordercolor='aliceblue'><b>FECHA DE SOLICITUD</b></td>
+                        <td Width='30%' align='right' bgcolor='white'><font color='#4b0082'>{DIA_HOY} de {MES_HOY}  del {ANIO_HOY}</font></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width='800' vAlign='center' colspan='3'>
+                <table cellSpacing='2' cellPadding='2' width='800' border='1'>
+                    <tr bgcolor='#006699'>
+                        <td Width='35%' bordercolor='aliceblue'><font color='white'><b>SEDE</b></font></td>
+                        <td Width='35%' bordercolor='aliceblue'><font color='white'><b>AREA</b></font></td>
+                        <td Width='30%' bordercolor='aliceblue'><font color='white'><b>C.COSTO</b></font></td>
+                    </tr>
+                    <tr>
+                        <td Width='35%' bgcolor='white'><font color='#4b0082'>{AREA}</font></td>
+                        <td Width='35%' bgcolor='white'><font color='#4b0082'>{SECCION}</font></td>
+                        <td Width='30%' bgcolor='white'><font color='#4b0082'>{JOB}</font></td>
+                    </tr>
+                    <tr bgcolor='#006699'>
+                        <td Width='35%' bordercolor='aliceblue'><font color='white'><b>CUENTA</b></font></td>
+                        <td Width='35%' bordercolor='aliceblue'><font color='white'><b>CANTIDAD DE PASAJEROS</b></font></td>
+                        <td Width='35%' bordercolor='aliceblue'><font color='white'><b>EMPRESA DE TRANSPORTES</b></font></td>
+                    </tr>
+                    <tr>
+                        <td Width='35%' bgcolor='white'><font color='#4b0082'>{CUENTA}</font></td>
+                        <td Width='35%' bgcolor='white'><font color='#4b0082'>{CANTIDAD_PASAJEROS}</font></td>
+                        <td Width='35%' bgcolor='white'><font color='#4b0082'>{NOMBRE_EMPRESA}</font></td>
+                    </tr>
+            </td>
+        </tr>
+    </table>
+    <tr>
+        <td width='800' vAlign='center' colspan='3'>
+            <table cellSpacing='2' cellPadding='2' width='800' border='1'>
+                <tr><td Width='100%' colspan='2' bgcolor='#006699' bordercolor='aliceblue'><font color='white'><b>RUTA</b></font></td></tr>
+                 {RUTA_ORIGEN_SI_HAY_FECHA_RETORNO}
+                <tr>
+                    <td colspan=2 Width='50%' align='left' bgcolor='white'>
+                        <font color='#4b0082'>{ORIGEN} - {DESTINO} - {ORIGEN}</font>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td Width='50%' align='left' bordercolor='aliceblue'><b>FECHA Y HORA DE SALIDA:</b></td>
+                    <td Width='50%' align='left' bordercolor='aliceblue'><b>FECHA Y HORA DE RETORNO</b></td>
+                </tr>
+                <tr>
+                    <td Width='50%' bgcolor='white'><font color='#4b0082'>{DIA_SALIDA}-{MES_SALIDA}-{ANIO_SALIDA}, {HORA_SALIDA}</font></td>
+                    <td Width='50%' bgcolor='white'>
+                        <font color='#4b0082'>   
+                            {DIA_RETORNO1}-{MES_RETORNO1}-{ANIO_RETORNO1}, {HORA_RETORNO1}  
+                        </font>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td width='800' vAlign='center' colspan='3'>
+            <table cellSpacing='2' cellPadding='2' width='800' border='1'>
+                <tr>
+                    <td Width='100%' colSpan='3' bgcolor='#006699' bordercolor='aliceblue'>
+                        <font color='white'><b>MOTIVO DEL VIAJE</b></font>
+                    </td>
+                </tr>
+                <tr><td Width='100%' Height='50' colSpan='3' bgcolor='white'><font color='#4b0082'>{MOTIVO}</font></td></tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td width='800' vAlign='center' colspan='3'>
+            <table cellSpacing='2' cellPadding='2' width='800' border='1'>
+                <tr bgcolor='#006699'>
+                    <td Width='50%' align='left'><font color='white' bordercolor='aliceblue'><b>NOMBRE DE PASAJERO</b></font></td>
+                    <td Width='50%' align='left' bordercolor='aliceblue'><font color='white'><b>DOCUMENTO DE IDENTIDAD</b></font></td>
+                </tr>
+                {FOREACH}  
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td width='800' vAlign='center' colspan='3'>
+            <table cellSpacing='2' cellPadding='2' width='800' border='1'>
+                <tr bgcolor='#006699'>
+                    <td Width='33%' bordercolor='aliceblue'><font color='white'><b>SOLICITADO POR</b></font></td>
+                    <td Width='33%' bordercolor='aliceblue'><font color='white'><b>APROBADO POR</b></font></td>
+                    <td Width='33%' bordercolor='aliceblue'><font color='white'><b>BARRICK</b></font></td>
+                </tr>
+                <tr>
+                    <td Width='33%' bgcolor='white'><font color='#4b0082'>{SOLICITADO_POR}</font></td>
+                    <td Width='33%' bgcolor='white'><font color='#4b0082'>{APROBADO_POR}</font></td>
+                    <td Width='33%' bgcolor='white'><font color='#4b0082'>{APROBACION_AUTOMATICA}</font></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td Width='650px' vAlign='center' colspan='3'>
+            <table cellSpacing='2' cellPadding='2' width='100%' border='1'>
+                <tr>
+                    <td valign='top' width='3%' bordercolor='aliceblue'><b>NOTA:</b></td>
+                    <td bgcolor='white'><font color='#4b0082'>{NOTA}</font></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr bordercolor=#f4f4f4>
+        <td width='800' background='images/fondo_cabecera.jpg' vAlign='center' align='middle' Height='40' colspan='3'></td>
+    </tr>
+    </table>
+    <center>
+        <a href='http://perlimiisp1/pasajes/index.asp?CodRegistro=" & session("CodRegistro") & "&TipoEvaluacion=1&Pagina=solicitudes/solicitudes.asp?pagina=so_pasajes_terrestres_login.asp' target='_blank'>
+            <img src='images/boton_evaluar.gif'>
+        </a>
+    </center>
+</body>
+</html>

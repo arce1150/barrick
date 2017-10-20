@@ -1,0 +1,192 @@
+
+
+HTML {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px;
+	FONT-FAMILY: tahoma; FONT-SIZE: 11PX;
+}
+
+BODY {
+	BACKGROUND-COLOR: #f1f0e9; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; 
+	PADDING-TOP: 0px; FONT-FAMILY: tahoma; FONT-SIZE: 11PX; COLOR:#003c58;
+}
+
+FORM {
+	MARGIN: 0px; FONT-FAMILY: tahoma; FONT-SIZE: 11PX; COLOR:#003c58;
+}
+
+UL {
+	FONT-FAMILY: tahoma; FONT-SIZE: 11PX; COLOR:#003c58;
+}
+
+LI {
+	FONT-FAMILY: tahoma; FONT-SIZE: 11PX; COLOR:#003c58;
+}
+
+TABLE {
+	FONT-FAMILY: tahoma; FONT-SIZE: 11PX; COLOR:#003c58;
+}
+
+TR {
+	FONT-FAMILY: tahoma; FONT-SIZE: 11PX; COLOR:#003c58;
+}
+
+TH {
+	FONT-FAMILY: tahoma; FONT-SIZE: 11PX; COLOR:#003c58;
+}
+
+SELECT {
+	FONT-FAMILY: tahoma; FONT-SIZE: 11PX; COLOR:#003c58;
+}
+
+INPUT {
+	FONT-FAMILY: tahoma; FONT-SIZE: 11PX; COLOR:#003c58;
+}
+
+DIV {
+	FONT-FAMILY: tahoma; FONT-SIZE: 11PX; COLOR:#003c58;
+}
+
+A { 
+	FONT-FAMILY: tahoma; FONT-SIZE: 11PX; COLOR:#003c58;
+}
+
+A:link	{	
+	text-decoration:	none;
+	color:	#003c58;
+}
+	
+A:hover {
+	text-decoration:	none;
+	COLOR: #998f64;
+}
+A:visited {
+	text-decoration:	none;
+	COLOR: #3333cc;
+}	
+A:active {	
+	text-decoration:	none;
+	color:	#003c58;
+}	
+		
+.ms-bannerframe 
+{	BACKGROUND-POSITION: left top; 
+	PADDING-LEFT: 25px; 
+	BORDER-BOTTOM: 0px; 
+	BACKGROUND-REPEAT: repeat-x; 
+	BACKGROUND-COLOR: #0d4662
+}
+
+.ms-pagetitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #0c4662;
+}
+
+A { 
+	FONT-FAMILY: tahoma; FONT-SIZE: 11PX; COLOR:#003c58;
+}
+
+#mainNav {PADDING-RIGHT: 1px; BACKGROUND-POSITION: right top; PADDING-LEFT: 0px; Z-INDEX: 99; BACKGROUND-IMAGE: url(images/bkgd_mainNav.gif); WIDTH: 167px; PADDING-TOP: 15px; BACKGROUND-REPEAT: repeat-y; HEIGHT: 100%; BACKGROUND-COLOR: #e0ddcd}
+#mainNav UL { BORDER-TOP: #bfb68f 1px dotted; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 167px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none }
+#mainNav UL LI { BORDER-BOTTOM: #bfb68f 1px dotted; BACKGROUND: #e0ddcd; POSITION: relative;	}
+#mainNav LI UL {	BACKGROUND: #e0ddcd; DISPLAY: none; LEFT: 167px; POSITION: absolute; TOP: 0px;}
+#mainNav UL LI A { BORDER-LEFT: #bfb68f 5px solid; BORDER-RIGHT: #e0ddcd 3px solid; PADDING-RIGHT: 5px; DISPLAY: block; PADDING-LEFT: 5px; BACKGROUND: #e0ddcd; PADDING-BOTTOM: 5px; COLOR: #003c58; PADDING-TOP: 5px; TEXT-DECORATION: none }
+#mainNav UL LI A:hover { BORDER-LEFT: #998f64 5px solid; BORDER-RIGHT: #998f64 3px solid; PADDING-RIGHT: 5px; DISPLAY: block; PADDING-LEFT: 5px; BACKGROUND: #998f64; PADDING-BOTTOM: 5px; COLOR: #ffffff; PADDING-TOP: 5px; TEXT-DECORATION: none }
+#mainNav UL LI A:link { BORDER-LEFT: #bfb68f 5px solid; BORDER-RIGHT: #e0ddcd 3px solid; PADDING-RIGHT: 5px; DISPLAY: block; PADDING-LEFT: 5px; BACKGROUND: #e0ddcd; PADDING-BOTTOM: 5px; COLOR: #003c58; PADDING-TOP: 5px; TEXT-DECORATION: none }
+#mainNavUL LI A:visited { BORDER-LEFT: #bfb68f 5px solid; BORDER-RIGHT: #e0ddcd 3px solid; PADDING-RIGHT: 5px; DISPLAY: block; PADDING-LEFT: 5px; BACKGROUND: #e0ddcd; PADDING-BOTTOM: 5px; COLOR: #003c58; PADDING-TOP: 5px; TEXT-DECORATION: none }
+* HTML UL LI { FLOAT: left; HEIGHT: 1%	}
+* HTML UL LI A { HEIGHT: 1% }
+#mainNav LI.over UL { DISPLAY: block }
+
+.table1{
+	border-collapse: collapse;
+	margin: 1em auto;
+	clear: left;
+	FONT-FAMILY: tahoma;
+    FONT-SIZE: xx-small;
+}
+
+.table1 caption{
+	background: #F6F4F1;
+	color: #110;
+	border: 1px solid #F2EDDA;
+	font-size: 110%;
+	letter-spacing: .1em;
+	padding: .5em;
+}
+
+.table1 th{
+	background: #e0ddcd;
+	border: 1px solid #F2EDDA;
+	color: #0c4662;
+	font-weight: normal;
+	padding: .4em;
+	text-align: left;
+	text-transform: capitalize;
+}
+
+.table1 th[scope="col"]{
+background: #110;
+}
+
+
+.table1 th[scope="row"]{
+background: #A58F6C;
+
+}
+
+.table1 th[scope="row"] a{
+color: #F5F4F1;
+
+}
+
+.Habilitado
+{
+	border: #7f9db9 1px solid;
+	background-position: right ;
+	background-image: url(../images/Calendar.gif);
+	width: 80%;
+	background-repeat: no-repeat;
+	height: 19px;
+}
+
+.DesHabilitado
+{
+	border: #e6e6dd 1px solid;
+	background-position: right ;
+	background-image: url(../images/CalendarDisable.GIF);
+	width: 80%;
+	background-repeat: no-repeat;
+	height: 19px;
+}
+
+
+/*.ms-fecha
+{
+	border-right: #7f9db9 1px solid;
+	border-top: #7f9db9 1px solid;
+	BACKGROUND-POSITION-X: right;
+	background-image: url(../images/Calendar.gif);
+	border-left: #7f9db9 1px solid;
+	width: 80%;
+	cursor: hand;
+	border-bottom: #7f9db9 1px solid;
+	background-repeat: no-repeat;
+	height: 21px;
+	background-color: white;
+	text-align: left;
+}
+*/
+.caja {
+	BORDER-RIGHT: #7f9db9 1px solid; 
+	BORDER-TOP: #7f9db9 1px solid;
+	BORDER-LEFT: #7f9db9 1px solid; 
+	WIDTH: 80%; COLOR: #696969; 
+	BORDER-BOTTOM: #7f9db9 1px solid; 
+	HEIGHT: 20px; 
+	BACKGROUND-COLOR: #ffffff;
+}
+
+
+.Visible { DISPLAY: block; VISIBILITY: visible }
+
+.NoVisible { DISPLAY: none; VISIBILITY: hidden }
+

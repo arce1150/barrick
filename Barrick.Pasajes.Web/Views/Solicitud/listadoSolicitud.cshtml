@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "listadoSolicitud";
+    var totalPaginas = ViewBag.nroPaginas;
+}
+<link href='@Url.Content("~/Content/css/petitorio.css")' rel="stylesheet" />
+<style type="text/css">
+   
+    .tblistado tbody {
+             color: #006699 !important;
+    }
+    
+    #tblPaginacion tr {   
+        color: #006699 !important;
+    }
+
+    #tblPaginacion td {
+        display: table-cell;         
+    }
+    
+    .pagin a {
+        font-size: 14px !important;  font-weight: bold !important;
+    }
+    .pagin ul {
+        padding: 7px 6px 5px 8px;
+    }
+    .pagin ul li {
+        list-style:none; float:left;padding-right:5px;
+    }   
+</style>
+<center>
+    <table  cellspacing="0" cellpadding="5" border="0">
+        <tbody>
+            <tr bordercolor="#F4F4F4">
+                <td background='@Url.Content("~/Content/images/fondo_cabecera.jpg")' width="124px" valign="center" align="center">
+                    <img src='@Url.Content("~/Content/images/barrick_blanco.gif")' border="0" width="75" height="43" />
+                </td>
+                <th background='@Url.Content("~/Content/images/fondo_cabecera.jpg")' width="526px" valign="top">
+                <font size="4" style="color: #006699 !important"><br>MINERA BARRICK MISQUICHILCA S.A<br>Lista de Solicitudes de Pasajes Terrestres<br><br></font></th>
+                <td background='@Url.Content("~/Content/images/fondo_cabecera.jpg")' width="124px" valign="center" align="center">
+                    <img src='@Url.Content("~/Content/images/barrick_blanco.gif")' width="75" height="43" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table bgcolor="gray" class="tblistado" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th bgcolor="#0d4662"><font color="white">Codigo</font></th>
+                                <th bgcolor="#0d4662" width="100"><font color="white">Fecha<br>Solicitud</font></th>
+                                <th bgcolor="#0d4662"><font color="white">C. Costo</font></th>
+                                <th bgcolor="#0d4662"><font color="white">Cuenta</font></th>
+                                <th bgcolor="#0d4662"><font color="white">Empresa</font></th>
+                                <th bgcolor="#0d4662"><font color="white">Origen</font></th>
+                                <th bgcolor="#0d4662"><font color="white">Destino</font></th>
+                                <th bgcolor="#0d4662" width="100"><font color="white">Fecha/Hora <br>Salida</font></th>
+                                <th bgcolor="#0d4662" width="100"><font color="white">Fecha/Hora <br>Retorno</font></th>
+                                <th bgcolor="#0d4662"><font color="white">Solicitante</font></th>
+                                <th bgcolor="#0d4662"><font color="white">Aprobador</font></th>
+                                <th bgcolor="#0d4662"><font color="white">Conta.</font></th>
+                                <th bgcolor="#0d4662"><font color="white">Aprobación<br>Area</font></th>
+                                <th bgcolor="#0d4662"><font color="white">Aprobación<br>Contabilidad</font></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblPaginacion"></tbody>
+                        <tfoot class="pagin">
+                            <tr>
+                                <td colspan="14" style="background:#ffffff !important">  
+                                        <ul id="ulPaginacion">
+                                            @for (var i = 0; i < totalPaginas; i++)
+                                            {
+                                               <li><a onclick="paginarSolicitudes(@(i+1))" href="javascript:void(0)">@(i +1)</a></li>
+                                            }
+                                        </ul>
+                                     
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</center>
+<script type="text/javascript">
+    function Ver(cod) {
+        var url = '@Url.Content("~/Solicitud/vistaPreviaSolicitud")' + '/?codigo=' + cod.toString();
+        window.open(url, "Requerimiento", "toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=800,height=650, top=50, left=120");
+    }
+    function ajax(url, tipoMetodo, tipoRpta, metodo, parametrosUrl) {
+        var xhr = new XMLHttpRequest();
+        xhr.open(tipoMetodo, url, true);
+        if (tipoMetodo == "post") xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
+        xhr.responseType = tipoRpta;
+        xhr.onreadystatechange = function () {
+            if (xhr.status == 200 && xhr.readyState == 4) {
+                if (tipoRpta == "" || tipoRpta == "text") {
+                    metodo(xhr.responseText, true);
+                }
+                else {
+                    metodo(xhr.response);
+                }
+            }
+        }
+        if (tipoMetodo == "post") {
+            xhr.send(parametrosUrl);
+        } else {
+            xhr.send();
+        }
+    }
+    window.onload = function () {
+        var imagen = '@Url.Content("~/Content/images/fondo_cabecera.jpg")';
+        document.body.style.background = "url('" + imagen + "')";
+        paginarSolicitudes(1);
+    };
+
+    function paginarSolicitudes(indicePagina) {
+        var urlAction = '@Url.Content("~/Solicitud/paginarPasajes")' + "/?indicePagina=" + parseInt(indicePagina);
+        var ulPaginacion = document.getElementById("ulPaginacion").getElementsByTagName("a");  
+        for (var j = 0; j < ulPaginacion.length; j++) {
+            ulPaginacion[j].style = "";
+        }
+        ulPaginacion[indicePagina - 1].style = "background: rgba(13, 70, 98, 0.35);border: 2px solid rgba(0, 51, 102, 0.83);border-radius: 100%;";
+
+        ajax(urlAction, "get", "json", function (response) {
+            var tbl = "";
+            if (response != "") {
+                var tblContenido = document.getElementById("tblPaginacion");
+                var totalLista =0;
+                var objListado = null;
+                if (typeof (response) == "string" || typeof (response) == "undefined") {
+                    var obj = JSON.parse(response);
+                    totalLista = Object.keys(obj.listaPaginacion).length;
+                    objListado = obj.listaPaginacion;
+                } else {
+                    totalLista = Object.keys(response.listaPaginacion).length;
+                    objListado = response.listaPaginacion;
+                }
+
+                for (var i = 0; i < totalLista; i++) {
+                    tbl += "<tr>";
+                    tbl += "<td bgcolor=\"white\" valign=\"top\"><a href=\"javascript:Ver('" + objListado[i].Idregistro + "')\"><u>" + objListado[i].Idregistro + "</u></a></td>";
+                    tbl += "<td bgcolor=\"white\" valign=\"top\">" + FormatJSONDate(objListado[i].Fecha) + "</td>";
+                    tbl += "<td bgcolor=\"white\" valign=\"top\">" + objListado[i].Idcc + "</td>";
+                    tbl += "<td bgcolor=\"white\" valign=\"top\">" + objListado[i].Cuenta + "</td>";
+                    tbl += "<td bgcolor=\"white\" valign=\"top\">" + objListado[i].NombreEmpresa + "</td>";
+                    tbl += "<td bgcolor=\"white\" valign=\"top\">" + objListado[i].Origen + "</td>";
+                    tbl += "<td bgcolor=\"white\" valign=\"top\">" + objListado[i].Destino + "</td>";
+                    tbl += "<td bgcolor=\"white\" valign=\"top\">" + FormatJSONDate(objListado[i].FechaSalida) + "</td>";
+                    tbl += "<td bgcolor=\"white\" valign=\"top\">" + FormatJSONDate(objListado[i].FechaRetorno) + "</td>";
+                    tbl += "<td bgcolor=\"white\" valign=\"top\">" + objListado[i].Solicitante + "</td>";
+                    tbl += "<td bgcolor=\"white\" valign=\"top\">" + objListado[i].AprobadorNombre + "</td>";
+                    tbl += "<td bgcolor=\"white\" valign=\"top\">" + objListado[i].NombreConta + "</td>";
+                    tbl += "<td bgcolor=\"white\" valign=\"top\">" + objListado[i].Area + "</td>";
+                    tbl += "<td bgcolor=\"white\" valign=\"top\">" + objListado[i].AprobacionConta + "</td>";
+                    tbl += "</tr>";
+                }
+                tblContenido.innerHTML = tbl;
+            }
+        }, null);
+    }
+</script>

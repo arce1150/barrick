@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+    <title>@ViewBag.Title</title>
+    <link href='@Url.Content("~/Content/css/Styles.css")' type="text/css" rel="stylesheet" />
+    <link href='@Url.Content("~/Content/css/UNIVERSO.css")' type="text/css" rel="stylesheet" />  
+    <script src="~/Content/script/Scripts.js"></script>
+</head>
+<body>
+    <table class="ms-bannerframe" cellSpacing='0' cellPadding='0' width='100%' border="0">
+        <tr>
+            <td width="110" align="center" height="90">
+                <a title='Site Logo' href='http://intranet.barrick.com/' target='_self'>
+                    <img alt='Site Logo' src='@Url.Content("~/Content/images/logo_barrick.gif")' border='0'>
+                </a>
+            </td>
+            <td>
+                <img src='@Url.Content("~/Content/images/bannerGraphic.gif")'>
+            </td>
+        </tr>
+    </table>
+    @{ if (Session["LoginUsuario"] != null)
+        {
+            Html.RenderAction("Superior", "Home", new { pagina = "cerrar_session.asp" });
+        }
+    }
+    @RenderBody()
+
+    @*@Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)*@
+</body>
+</html>

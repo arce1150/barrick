@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Superior";
+    var Titulo = string.Empty;
+    string pagina = ViewBag.Pagina.ToString();
+    switch (pagina)
+    {
+        case "login.asp":
+        case "login.asp?Vali=1":
+        case "login.asp?Vali=2":
+        case "so_pasajes_terrestres_login.asp":
+        case "so_pasajes_terrestres_Login.asp?Vali=1":
+        case "so_pasajes_terrestres_Login.asp?Vali=2":
+            Titulo = "Sistema de Solicitudes - Login";
+            break;
+        case "so_reservas_asientos.asp":
+            Titulo = "Servicio Especial - Movil Tours (Viernes)";
+            break;
+        case "menu.asp":
+            Titulo = "Sistema de Solicitudes - Menú"; break;
+        case "so_pasajes_aereos.asp":
+            Titulo = "Sistema de Solicitudes - Pasajes Aereos"; break;
+        case "so_pasajes_terrestres.asp":
+            Titulo = "Sistema de Solicitudes - Pasajes Terrestres"; break;
+        case "so_pasajes_todas.asp":
+            Titulo = "Sistema de Solicitud - Mis Solicitudes"; break;
+        case "so_viaticos.asp":
+            Titulo = "Sistema de Solicitudes - Viáticos"; break;
+        case "so_hospedaje.asp":
+            Titulo = "Sistema de Solicitudes - Hospedaje"; break;
+        case "so_pasajes_terrestres_evaluar.asp":
+            if (Session["Condicion"] == "Modificar")
+            {
+                Titulo = "Sistema de Solicitud - Pasajes Terrestres - Modificar";
+            }
+            else
+            {
+                Titulo = "Sistema de Solicitud - Pasajes Terrestres - Evaluación";
+            }
+
+            break;
+        case "so_pasajes_terrestres_enviar.asp":
+            Titulo = "Sistema de Solicitud - Pasajes Terrestres - Envio"; break;
+        case "cerrar_session.asp":
+            Titulo = "Sistema de Solicitudes - Termino de Sessión"; break;
+        default:
+            Titulo = pagina; break;
+    }     
+
+}
+ <style>
+     .Enlace {
+         color:#fff  !important
+     }
+ </style>
+<table border="0" width="100%" bgcolor="#0d4662" align="center" style="width:100%">
+    <tr>
+        <td><font color="aliceblue" face="Verdana" size="3"><b>@Titulo</b></font></td>
+        <td style="text-align:right;color:#fff !important">
+            @{ if (Titulo != "Sistema de Solicitudes - Login")
+                {
+                    <font color="white" face="Verdana" size="2">|&nbsp;</font>
+            <a class="Enlace" href='@Url.Content("~/Solicitud/listadoSolicitud")'  class="Enlace"><font face="Verdana" size="2">Mis Solicitudes</font></a>
+                    <font color="white" face="Verdana" size="2">|&nbsp;</font>
+            <a href='@Url.Content("~/Solicitud/Index")'   class="Enlace"><font face="Verdana" size="2">Nueva Solicitud de Pasajes</font></a>
+                    <font color="white" face="Verdana" size="2">|&nbsp;</font>
+            <a href='@Url.Content("~/Home/CerrarSession")' class=Enlace><font face="Verdana" size="2">Salir</font></a>
+                    <font color="white" face="Verdana" size="2">|</font>
+                }
+                
+            }
+        </td>
+    </tr>
+</table>

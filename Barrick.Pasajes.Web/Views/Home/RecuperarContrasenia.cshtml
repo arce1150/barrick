@@ -1,0 +1,70 @@
+﻿@model Barrick.Pasajes.BusinessEntity.MPersonalBe
+@{
+    Layout = null;
+    var user = HttpContext.Current.Request.QueryString["user"];
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Envío de Password a tu Correo electrónico</title>
+</head>
+<body>
+     @if (Model == null)
+     {
+        <p align="center"><b><font size="3">Los sentimos el Sistema no ha podido enviar el password ya que no cuenta con un correo en el Sistema</font></b></p>
+        <p align="center">&nbsp;</p>
+        <p align="center"><img border="0" src='@Url.Content("~/Content/images/key.jpg")' width="225" height="164"></p>
+        <p align="center">&nbsp;</p>
+        <p align="center">
+            * Los emails del personal de MBM están registrados en la Base
+            de Datos, si no tienes email, <a href="mailto:jnieto@barrick.com">
+                haz click aquí para contactarnos
+                y darte tu password o agregar tu dirección electrónica
+            </a>.
+        </p>
+     }
+     else
+     {
+        <p align="center">
+            <b>
+                <font size="3">
+                    El Sistema ha enviado tu password a tu cuenta de
+                    email *:
+                </font>
+            </b>
+        </p>
+        <p align="center"><font color="#FF0000">@Model.Email</font></p>
+        <p align="center">
+            Espera unos minutos y revisa tu email, encontrarás tu
+            password para acceder al Sistema
+        </p>
+        <p align="center">&nbsp;</p>
+        <p align="center"><img border="0" src='@Url.Content("~/Content/images/key.jpg")' width="225" height="164"></p>
+        <p align="center">&nbsp;</p>
+        <p align="center">
+            * Los emails del personal de MBM están registrados en la Base
+            de Datos, si tu email está incorrecto, <a href="mailto:jnieto@barrick.com">
+                haz click aquí para contactarnos
+                y corregir tu dirección electrónica
+            </a>.
+        </p>
+     }
+    <script type="text/javascript">
+        
+        window.onload=function(){
+            var usuario = '@user';
+            var html = "";
+            if (usuario == "" || usuario == null) {
+                html += "<p align='center'><b><font color='red' size='3'>";
+                html += "Intenta ingresando tu usuario nuevamente, para que el sistema pueda enviarte tu password.<br></font></b></p>";
+                html += "<center><a href='javascript:window.close();'>Cerrar</a></center>";
+                document.write(html);
+                alert("No ingresó el Usuario, intente nuevamente")
+                setTimeout('window.close()', 500);
+            }
+        };
+    </script>
+</body>
+</html>

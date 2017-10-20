@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DBD18DCC-5977-47E4-BF6B-1634F9E1D73A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Barrick.Pasajes.DataAccess</RootNamespace>
+    <AssemblyName>Barrick.Pasajes.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AprobadorDa.cs" />
+    <Compile Include="AreasDa.cs" />
+    <Compile Include="CcostosDa.cs" />
+    <Compile Include="CombinacionesDa.cs" />
+    <Compile Include="Contracts\IAprobadorDa.cs" />
+    <Compile Include="Contracts\IAreasDa.cs" />
+    <Compile Include="Contracts\ICcostosDa.cs" />
+    <Compile Include="Contracts\ICombinacionesDa.cs" />
+    <Compile Include="Contracts\ICuentasDa.cs" />
+    <Compile Include="Contracts\IDaUsuario.cs" />
+    <Compile Include="Contracts\IEmpresasDa.cs" />
+    <Compile Include="Contracts\IMPersonalDa.cs" />
+    <Compile Include="Contracts\IPasajesTerrestresDa.cs" />
+    <Compile Include="Contracts\IRutasDa.cs" />
+    <Compile Include="CuentasDa.cs" />
+    <Compile Include="DaUsuario.cs" />
+    <Compile Include="EmpresasDa.cs" />
+    <Compile Include="MPersonalDa.cs" />
+    <Compile Include="PasajesTerrestresDa.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RutasDa.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Barrick.Pasajes.BusinessEntity\Barrick.Pasajes.BusinessEntity.csproj">
+      <Project>{F3B94102-660C-411F-A2BC-CE1272282E3D}</Project>
+      <Name>Barrick.Pasajes.BusinessEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Barrick.Pasajes.CrossCutting\Barrick.Pasajes.CrossCutting.csproj">
+      <Project>{4d7681f0-98c6-43cf-8f37-49695a04ed1b}</Project>
+      <Name>Barrick.Pasajes.CrossCutting</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

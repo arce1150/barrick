@@ -1,0 +1,115 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barrick.Pasajes.Web", "Barrick.Pasajes.Web\Barrick.Pasajes.Web.csproj", "{1FA3FFA0-24B8-4634-B851-AB1C96DA3C6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barrick.Pasajes.BusinessEntity", "Barrick.Pasajes.BusinessEntity\Barrick.Pasajes.BusinessEntity.csproj", "{F3B94102-660C-411F-A2BC-CE1272282E3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barrick.Pasajes.BusinessLogic", "Barrick.Pasajes.BusinessLogic\Barrick.Pasajes.BusinessLogic.csproj", "{1822E008-496A-4883-A5F3-0F879F41FC86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barrick.Pasajes.CrossCutting", "Barrick.Pasajes.CrossCutting\Barrick.Pasajes.CrossCutting.csproj", "{4D7681F0-98C6-43CF-8F37-49695A04ED1B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{9E97C8A3-2AA4-4EC0-A606-D30A80F06EC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barrick.Pasajes.DataAccess", "Barrick.Pasajes.DataAccess\Barrick.Pasajes.DataAccess.csproj", "{DBD18DCC-5977-47E4-BF6B-1634F9E1D73A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossCutting", "CrossCutting", "{E3C3FD78-7030-4007-8EAC-973AEF373ACA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{ECC04082-0121-4BC7-B7DE-1BEEE3833B07}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{D7DBD054-C1E9-41A1-A81C-5CC7051248CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{9868351A-7FEE-47E6-B431-71340CCDB1F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{688C0B8D-78E9-487E-A14D-E0ED30B80187}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barrick.Pasajes.Error", "Barrick.Pasajes.Error\Barrick.Pasajes.Error.csproj", "{53179EC1-AACF-444C-A62E-0B44A678C598}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServicioCorreos", "ServicioCorreos", "{A1390885-EA22-434C-9DCC-BB3B700A736B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barrick.Pasajes.MailService", "Barrick.Pasajes.MailService\Barrick.Pasajes.MailService.csproj", "{FAF73A7D-FAAD-4E1A-8A4A-E416E3223F71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FA3FFA0-24B8-4634-B851-AB1C96DA3C6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FA3FFA0-24B8-4634-B851-AB1C96DA3C6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FA3FFA0-24B8-4634-B851-AB1C96DA3C6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FA3FFA0-24B8-4634-B851-AB1C96DA3C6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3B94102-660C-411F-A2BC-CE1272282E3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3B94102-660C-411F-A2BC-CE1272282E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3B94102-660C-411F-A2BC-CE1272282E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3B94102-660C-411F-A2BC-CE1272282E3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1822E008-496A-4883-A5F3-0F879F41FC86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1822E008-496A-4883-A5F3-0F879F41FC86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1822E008-496A-4883-A5F3-0F879F41FC86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1822E008-496A-4883-A5F3-0F879F41FC86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D7681F0-98C6-43CF-8F37-49695A04ED1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D7681F0-98C6-43CF-8F37-49695A04ED1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D7681F0-98C6-43CF-8F37-49695A04ED1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D7681F0-98C6-43CF-8F37-49695A04ED1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBD18DCC-5977-47E4-BF6B-1634F9E1D73A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBD18DCC-5977-47E4-BF6B-1634F9E1D73A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBD18DCC-5977-47E4-BF6B-1634F9E1D73A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBD18DCC-5977-47E4-BF6B-1634F9E1D73A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53179EC1-AACF-444C-A62E-0B44A678C598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53179EC1-AACF-444C-A62E-0B44A678C598}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53179EC1-AACF-444C-A62E-0B44A678C598}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53179EC1-AACF-444C-A62E-0B44A678C598}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAF73A7D-FAAD-4E1A-8A4A-E416E3223F71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAF73A7D-FAAD-4E1A-8A4A-E416E3223F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAF73A7D-FAAD-4E1A-8A4A-E416E3223F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAF73A7D-FAAD-4E1A-8A4A-E416E3223F71}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1FA3FFA0-24B8-4634-B851-AB1C96DA3C6F} = {D7DBD054-C1E9-41A1-A81C-5CC7051248CC}
+		{F3B94102-660C-411F-A2BC-CE1272282E3D} = {9E97C8A3-2AA4-4EC0-A606-D30A80F06EC7}
+		{1822E008-496A-4883-A5F3-0F879F41FC86} = {9E97C8A3-2AA4-4EC0-A606-D30A80F06EC7}
+		{4D7681F0-98C6-43CF-8F37-49695A04ED1B} = {E3C3FD78-7030-4007-8EAC-973AEF373ACA}
+		{DBD18DCC-5977-47E4-BF6B-1634F9E1D73A} = {ECC04082-0121-4BC7-B7DE-1BEEE3833B07}
+		{53179EC1-AACF-444C-A62E-0B44A678C598} = {688C0B8D-78E9-487E-A14D-E0ED30B80187}
+		{FAF73A7D-FAAD-4E1A-8A4A-E416E3223F71} = {A1390885-EA22-434C-9DCC-BB3B700A736B}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://itsightconsulting.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Barrick.Pasajes.Web\\Barrick.Pasajes.Web.csproj
+		SccProjectTopLevelParentUniqueName1 = Barrick.Pasajes.sln
+		SccProjectName1 = Barrick.Pasajes.Web
+		SccLocalPath1 = Barrick.Pasajes.Web
+		SccProjectUniqueName2 = Barrick.Pasajes.BusinessEntity\\Barrick.Pasajes.BusinessEntity.csproj
+		SccProjectTopLevelParentUniqueName2 = Barrick.Pasajes.sln
+		SccProjectName2 = Barrick.Pasajes.BusinessEntity
+		SccLocalPath2 = Barrick.Pasajes.BusinessEntity
+		SccProjectUniqueName3 = Barrick.Pasajes.BusinessLogic\\Barrick.Pasajes.BusinessLogic.csproj
+		SccProjectTopLevelParentUniqueName3 = Barrick.Pasajes.sln
+		SccProjectName3 = Barrick.Pasajes.BusinessLogic
+		SccLocalPath3 = Barrick.Pasajes.BusinessLogic
+		SccProjectUniqueName4 = Barrick.Pasajes.CrossCutting\\Barrick.Pasajes.CrossCutting.csproj
+		SccProjectTopLevelParentUniqueName4 = Barrick.Pasajes.sln
+		SccProjectName4 = Barrick.Pasajes.CrossCutting
+		SccLocalPath4 = Barrick.Pasajes.CrossCutting
+		SccProjectUniqueName5 = Barrick.Pasajes.DataAccess\\Barrick.Pasajes.DataAccess.csproj
+		SccProjectTopLevelParentUniqueName5 = Barrick.Pasajes.sln
+		SccProjectName5 = Barrick.Pasajes.DataAccess
+		SccLocalPath5 = Barrick.Pasajes.DataAccess
+		SccProjectUniqueName6 = Barrick.Pasajes.Error\\Barrick.Pasajes.Error.csproj
+		SccProjectTopLevelParentUniqueName6 = Barrick.Pasajes.sln
+		SccProjectName6 = Barrick.Pasajes.Error
+		SccLocalPath6 = Barrick.Pasajes.Error
+		SccProjectUniqueName7 = Barrick.Pasajes.MailService\\Barrick.Pasajes.MailService.csproj
+		SccProjectTopLevelParentUniqueName7 = Barrick.Pasajes.sln
+		SccProjectName7 = Barrick.Pasajes.MailService
+		SccLocalPath7 = Barrick.Pasajes.MailService
+	EndGlobalSection
+EndGlobal
